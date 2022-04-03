@@ -4,5 +4,5 @@ from django.template import loader
 
 # Create your views here.
 def index(request):
-    templates =loader.get_template('navbar.html')
+    templates =loader.get_template('index.html')
     return HttpResponse(templates.render())
