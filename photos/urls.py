@@ -20,7 +20,7 @@ urlpatterns = [
   re_path(r'^feeds_profile/(?P<pk>\d+)$',app_views.users_profile,name='users_profile'),
   re_path(r'^follow/(?P<user_id>\d+)$',app_views.follow,name='follow'),
   re_path(r'^unfollow/(?P<user_id>\d+)$',app_views.unfollow,name='unfollow'),
-  re_path(r'^delete/(?P<photo_id>\d+)$',app_views.delete,name='delete'),
+  re_path(r'^delete/(?P<photo_id>\d+)$',app_views.delete,name='delete')
 
 
 ]
