@@ -1,0 +1,20 @@
+{%extends 'base.html'%}
+{% block content %} 
+{{ block.super}}
+
+<div class="container-fluid">
+
+  <div class="row post">
+    <div class="col-md-4">
+      <h2>{{ post.name}}</h2>
+      <img style="height: 16rem;width:16rem;" src="{{post.image.url}}"  alt="Image">
+      <p style="font-style: oblique;">{{post.image_caption}}</p>
+      <p><strong>{{post.added_like}} likes </strong>
+      </p>
+      <P><strong>{{post.added_comments.count}} comments</strong></P>
+      <a href="{% url 'delete' post.id %}" class="btn btn-primary">Delete Post</a>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

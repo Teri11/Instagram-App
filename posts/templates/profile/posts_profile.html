@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% load static %}
+{% block content %}
+<div class="container">
+  <div class="row" style="margin-bottom: 5px;">
+    <img src="{{user.profile.picture.url}}" alt="{{user.profile_post.url}}" style="height: 20vh; width:20vh;"
+      class="rounded-circle account-img">
+  </div>
+  <div class="row">
+    <p class="">{{user.username}}</p>
+    <p class="">{{user.profile.bio}}</p>
+    <p><a href="{% url 'update_user' %}">
+        <button class="btn btn-primary">Update Details</button>
+      </a></p>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      {% if posts %}
+      {% for post in posts %}
+      <div class="profile">
+        <div class="row">
+          <p><a href="{% url 'posts_profile' post.user.id %}"><img style="height: 1cm; width: 1cm; border-radius:50%; margin-left: 10px; "
+                class="profile_post" src="{{ post.user.profile.picture.url }}" alt="{{ post.profile.name }}"></p>
+          <p class="username" style="margin-top: 5px;">{{ post.user.username }}</p>
+        </div>
+        </a>
+      </div>
+      <div class="card-header">
+        <a href="{% url 'post.detail' post.id %}"  class="open-project"><img src="{{post.image.url}}" style="margin-bottom: 10px;" alt=""
+            class=""></a>
+            <p style="font-style:oblique;"> {{post.image_caption}}</p>
+      </div>
+      <div class="card-body">
+        <div>
+          <a href=" {% url 'likes' post_id=post.id %}">
+            <button class="btn btn-primary">Like</button></a>
+          <p><strong class="ml-3 post_likes">{{post.added_like}} </strong>
+            <strong>Likes</strong>
+          </p>
+        </div>
+        <div>
+          
+        </div>
+        {% for comment in post.added_comments %}
+        <p class="ml-3"><span class="font-weight-bold text-primary">{{comment.user.username}}</span><br>
+          {{comment.comment}}</p>
+        {% endfor %}
+        <form action="{% url 'comment' post_id=post.id %}" method="post">
+          {% csrf_token %}
+          {% bootstrap_form add_comment %}
+          <input type="submit" class="btn btn-primary btn-lg" style="margin-bottom: 10px;" value="Comment">
+        </form>
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

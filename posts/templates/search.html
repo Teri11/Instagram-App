@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      {% if users%}
+      <h2>Found {{ users|length }} users</h2>
+      {% else %}
+      <h2> Found 0 users</h2>
+      {% endif %}
+      {% for result in users %}
+      <p><a class="text-primary" href="{% url 'posts_profile' result.user.id  %}"><span
+            class="font-weight-bold">{{result.user.username}}</span></a></p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+</div>
+
+
+{% endblock %}
